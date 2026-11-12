@@ -31,15 +31,16 @@
         </nav>
     </header>
 
-    <!-- Single Iframe (Prevents dual WebGL memory crashes on mobile) -->
+    <!-- Single Iframe (Swapped default to Small%20Kitchen.html which holds the Merged view) -->
     <main class="flex-1 w-full relative overflow-hidden bg-slate-950">
-        <iframe id="viewer-frame" src="Merged%20Kitchen.html" class="w-full h-full border-none block" title="3D Kitchen View"></iframe>
+        <iframe id="viewer-frame" src="Small%20Kitchen.html" class="w-full h-full border-none block" title="3D Kitchen View"></iframe>
     </main>
 
     <script>
+        // Swapped file paths to match the actual content inside each HTML file
         const routes = {
-            merged: "Merged%20Kitchen.html",
-            small: "Small%20Kitchen.html"
+            merged: "Small%20Kitchen.html",
+            small: "Merged%20Kitchen.html"
         };
 
         function switchView(viewName) {
