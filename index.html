@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kitchen 3D Walkthroughs</title>
+    <!-- Tailwind CSS for modern styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .view-frame {
+            display: none;
+            width: 100%;
+            height: calc(100vh - 64px);
+            border: none;
+        }
+        .view-frame.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 font-sans antialiased overflow-hidden">
+
+    <!-- Top Navigation Bar -->
+    <header class="h-16 bg-slate-800 border-b border-slate-700 flex items-center justify-between px-6 shadow-md">
+        <div class="flex items-center space-x-3">
+            <span class="w-3 h-3 bg-emerald-500 rounded-full animate-pulse"></span>
+            <h1 class="text-lg font-semibold tracking-wide">Kitchen Walkthrough Portal</h1>
+        </div>
+        
+        <!-- Navigation Tabs -->
+        <nav class="flex space-x-2 bg-slate-900 p-1 rounded-lg border border-slate-700">
+            <button onclick="switchView('merged')" id="btn-merged" class="px-4 py-1.5 text-sm font-medium rounded-md transition-all bg-emerald-600 text-white shadow">
+                Merged Kitchen
+            </button>
+            <button onclick="switchView('small')" id="btn-small" class="px-4 py-1.5 text-sm font-medium rounded-md transition-all text-slate-400 hover:text-white">
+                Small Kitchen
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Content Area (Iframes loading your HTML files) -->
+    <main class="w-full h-[calc(100vh-64px)]">
+        <!-- Make sure 'Merged Kitchen.html' is in the exact same folder -->
+        <iframe id="view-merged" src="Merged Kitchen.html" class="view-frame active" title="Merged Kitchen View"></iframe>
+        
+        <!-- Make sure 'Small Kitchen.html' is in the exact same folder -->
+        <iframe id="view-small" src="Small Kitchen.html" class="view-frame" title="Small Kitchen View"></iframe>
+    </main>
+
+    <script>
+        function switchView(viewName) {
+            const mergedFrame = document.getElementById('view-merged');
+            const smallFrame = document.getElementById('view-small');
+            const mergedBtn = document.getElementById('btn-merged');
+            const smallBtn = document.getElementById('btn-small');
+
+            if (viewName === 'merged') {
+                mergedFrame.classList.add('active');
+                smallFrame.classList.remove('active');
+                
+                mergedBtn.className = "px-4 py-1.5 text-sm font-medium rounded-md transition-all bg-emerald-600 text-white shadow";
+                smallBtn.className = "px-4 py-1.5 text-sm font-medium rounded-md transition-all text-slate-400 hover:text-white";
+            } else {
+                smallFrame.classList.add('active');
+                mergedFrame.classList.remove('active');
+                
+                smallBtn.className = "px-4 py-1.5 text-sm font-medium rounded-md transition-all bg-emerald-600 text-white shadow";
+                mergedBtn.className = "px-4 py-1.5 text-sm font-medium rounded-md transition-all text-slate-400 hover:text-white";
+            }
+        }
+    </script>
+</body>
+</html>
