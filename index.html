@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Kitchen 3D Walkthroughs</title>
+    <title>Edathua Home - 3D Walkthroughs</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .app-shell {
@@ -18,48 +18,47 @@
     <header class="shrink-0 bg-slate-800 border-b border-slate-700 px-4 py-3 sm:px-6 sm:h-16 flex flex-col sm:flex-row items-center justify-between gap-2.5 shadow-md z-10">
         <div class="flex items-center space-x-2.5">
             <span class="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse"></span>
-            <h1 class="text-base sm:text-lg font-semibold tracking-wide">Kitchen Walkthrough</h1>
+            <h1 class="text-base sm:text-lg font-semibold tracking-wide">3D Home Walkthroughs</h1>
         </div>
         
-        <nav class="w-full sm:w-auto grid grid-cols-2 sm:flex gap-1 bg-slate-900 p-1 rounded-lg border border-slate-700">
-            <button onclick="switchView('merged')" id="btn-merged" class="w-full sm:w-auto px-3 sm:px-4 py-1.5 text-xs sm:text-sm font-medium rounded-md transition-all bg-emerald-600 text-white shadow text-center">
+        <nav class="w-full sm:w-auto grid grid-cols-3 sm:flex gap-1 bg-slate-900 p-1 rounded-lg border border-slate-700">
+            <button onclick="switchView('home')" id="btn-home" class="w-full sm:w-auto px-2 sm:px-4 py-1.5 text-xs sm:text-sm font-medium rounded-md transition-all bg-emerald-600 text-white shadow text-center truncate">
+                Edathua Home
+            </button>
+            <button onclick="switchView('merged')" id="btn-merged" class="w-full sm:w-auto px-2 sm:px-4 py-1.5 text-xs sm:text-sm font-medium rounded-md transition-all text-slate-400 hover:text-white text-center truncate">
                 Merged Kitchen
             </button>
-            <button onclick="switchView('small')" id="btn-small" class="w-full sm:w-auto px-3 sm:px-4 py-1.5 text-xs sm:text-sm font-medium rounded-md transition-all text-slate-400 hover:text-white text-center">
+            <button onclick="switchView('small')" id="btn-small" class="w-full sm:w-auto px-2 sm:px-4 py-1.5 text-xs sm:text-sm font-medium rounded-md transition-all text-slate-400 hover:text-white text-center truncate">
                 Small Kitchen
             </button>
         </nav>
     </header>
 
-    <!-- Single Iframe (Swapped default to Small%20Kitchen.html which holds the Merged view) -->
+    <!-- Single Iframe -->
     <main class="flex-1 w-full relative overflow-hidden bg-slate-950">
-        <iframe id="viewer-frame" src="Small%20Kitchen.html" class="w-full h-full border-none block" title="3D Kitchen View"></iframe>
+        <iframe id="viewer-frame" src="edathua_home.html" class="w-full h-full border-none block" title="3D Walkthrough View"></iframe>
     </main>
 
     <script>
-        // Swapped file paths to match the actual content inside each HTML file
         const routes = {
+            home: "edathua_home.html",
             merged: "Small%20Kitchen.html",
             small: "Merged%20Kitchen.html"
         };
 
+        const activeClasses = "w-full sm:w-auto px-2 sm:px-4 py-1.5 text-xs sm:text-sm font-medium rounded-md transition-all bg-emerald-600 text-white shadow text-center truncate";
+        const inactiveClasses = "w-full sm:w-auto px-2 sm:px-4 py-1.5 text-xs sm:text-sm font-medium rounded-md transition-all text-slate-400 hover:text-white text-center truncate";
+
         function switchView(viewName) {
             const frame = document.getElementById('viewer-frame');
-            const mergedBtn = document.getElementById('btn-merged');
-            const smallBtn = document.getElementById('btn-small');
-
-            const activeClasses = "w-full sm:w-auto px-3 sm:px-4 py-1.5 text-xs sm:text-sm font-medium rounded-md transition-all bg-emerald-600 text-white shadow text-center";
-            const inactiveClasses = "w-full sm:w-auto px-3 sm:px-4 py-1.5 text-xs sm:text-sm font-medium rounded-md transition-all text-slate-400 hover:text-white text-center";
-
             frame.src = routes[viewName];
 
-            if (viewName === 'merged') {
-                mergedBtn.className = activeClasses;
-                smallBtn.className = inactiveClasses;
-            } else {
-                smallBtn.className = activeClasses;
-                mergedBtn.className = inactiveClasses;
-            }
+            Object.keys(routes).forEach(key => {
+                const btn = document.getElementById(`btn-${key}`);
+                if (btn) {
+                    btn.className = (key === viewName) ? activeClasses : inactiveClasses;
+                }
+            });
         }
     </script>
 </body>
